@@ -1,0 +1,333 @@
+*,
+::before,
+::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	background: #ebf5fc;
+	color: #ebf5fc;
+}
+
+h1 {
+	text-align: center;
+	padding: 25px 0;
+	color: #333;
+}
+
+.recherche-poke {
+	max-width: 700px;
+	width: 70%;
+	min-width: 450px;
+	margin: 30px auto;
+	position: relative;
+	display: flex;
+}
+
+.inp-group {
+	width: 100%;
+}
+
+.recherche-poke input {
+	width: 100%;
+	padding: 15px;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	font-size: 18px;
+	background: #333;
+	color: #fff;
+}
+
+.recherche-poke label {
+	position: absolute;
+	color: #ebf5fc;
+	top: 50%;
+	transform: translateY(-50%);
+	padding-left: 8px;
+	transition: all 0.3s ease-in;
+}
+
+.recherche-poke button {
+	margin-left: 5px;
+	padding: 15px;
+}
+
+/***************************** Animation Input *****************************/
+.recherche-poke:focus-within label,
+.recherche-poke.active-input label {
+	top: -15px;
+	padding-left: 5px;
+	color: #333;
+}
+
+/***************************** Liste des cartes *****************************/
+.container {
+	width: 100%;
+	max-width: 1200px;
+	height: auto;
+	margin: 0 auto;
+}
+
+ul {
+	list-style-type: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.flip-card-container {
+	width: 350px;
+	height: 450px;
+	perspective: 1000px;
+	box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.05),
+		inset -5px -5px 5px rgba(255, 255, 255, 0.5),
+		5px 5px 5px rgba(0, 0, 0, 0.05), -5px -5px 5px rgba(255, 255, 255, 0.5);
+	border-radius: 15px;
+	margin: 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.flip-card {
+	width: 315px;
+	height: 415px;
+	position: relative;
+	transform-style: preserve-3d;
+	transition: transform 1s;
+}
+
+.flip-card-container:hover .flip-card {
+	transform: rotateY(180deg);
+}
+
+.frontCard,
+.backCard {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 2em;
+	backface-visibility: hidden;
+	border-radius: 15px;
+}
+
+.frontCard {
+	background: #fff;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+	border-radius: 15px;
+	color: #333;
+	flex-direction: column;
+}
+
+.backCard {
+	background: #fff;
+	color: #333;
+	transform: rotateY(180deg);
+	flex-direction: column;
+	font-size: 1em;
+}
+
+.backCard .hType {
+	font-weight: 600;
+	font-size: 1.2em;
+	position: absolute;
+	top: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.backCard .type {
+	display: flex;
+	flex-direction: row;
+	position: absolute;
+	top: 50px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.backCard .type a {
+	color: #fff;
+	text-decoration: none;
+	background: #03a9f4;
+	padding: 7px 25px;
+	margin: 5px;
+	margin-top: 10px;
+	border-radius: 5px;
+	display: flex;
+}
+
+.stats {
+	font-weight: 600;
+	font-size: 1.2em;
+	display: flex;
+	justify-content: center;
+	margin: 10px 0 0;
+	position: absolute;
+	top: 120px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.skills-bar {
+	width: 310px;
+	background: #fff;
+	border-radius: 10px;
+	padding: 15px 30px;
+}
+
+.skills-bar .bar {
+	margin: 20px 0;
+}
+
+.skills-bar .bar:first-child {
+	margin-top: 0;
+}
+
+.skills-bar .bar .info .info-span-titre {
+	font-size: 20px;
+	position: absolute;
+	left: 20px;
+	top: 185px;
+	font-weight: 500;
+	opacity: 0;
+	animation: showText 0.5s 1 linear forwards;
+}
+
+.skills-bar .bar .info .info-span-stats {
+	position: absolute;
+	right: 10px;
+	top: 186px;
+}
+
+@keyframes showText {
+	100% {
+		opacity: 1;
+	}
+}
+
+.skills-bar .bar .progress-line {
+	position: relative;
+	left: 30px;
+	height: 10px;
+	width: 75%;
+	background: #f0f0f0;
+	transform: scaleX(0);
+	transform-origin: left;
+	box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.05),
+		0px 1px rgba(255, 255, 255, 0.8);
+	animation: animate 1s cubic-bezier(1, 0, 0.5, 1) forwards;
+}
+
+.bar .progress-line span {
+	height: 100%;
+	width: 80%;
+	max-width: 100%;
+	background: #03a9f4;
+	position: absolute;
+	border-radius: 10px;
+	transform: scaleX(0);
+	transform-origin: left;
+	animation: animate 1s 1s cubic-bezier(1, 0, 0.5, 1) forwards;
+}
+
+@keyframes animate {
+	100% {
+		transform: scaleX(1);
+	}
+}
+
+/* .bar .progress-line span::before {
+	position: absolute;
+	content: "";
+	right: 0;
+	top: -10px;
+	height: 0;
+	width: 0;
+	border: 7px solid transparent;
+	border-bottom-width: 0px;
+	border-right-width: 0px;
+	border-top-color: #000;
+	opacity: 0;
+	animation: showText2 0.5s 1.5 linear forwards;
+}
+
+.bar .progress-line span::after {
+	position: absolute;
+	right: 0;
+	top: -28px;
+	color: #fff;
+	background: #000;
+	font-size: 12px;
+	font-weight: 500;
+	padding: 1px 8px;
+	border-radius: 3px;
+	opacity: 0;
+	animation: showText2 0.5s 1.5 linear forwards;
+} */
+
+@keyframes showText2 {
+	100% {
+		opacity: 1;
+	}
+}
+
+.liste-poke h5 {
+	font-size: 30px;
+	color: #333;
+}
+
+.liste-poke p {
+	display: none;
+}
+
+.liste-poke img {
+	width: 70%;
+	height: 70%;
+}
+
+/***************************** Animation Loader *****************************/
+
+.loader {
+	position: absolute;
+	top: 250px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 200px;
+	height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.point {
+	margin: 0 5px;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background: #333;
+	animation: up 0.3s alternate infinite;
+}
+
+.point:nth-child(1) {
+	animation-delay: 0.1s;
+}
+.point:nth-child(2) {
+	animation-delay: 0.2s;
+}
+.point:nth-child(3) {
+	animation-delay: 0.3s;
+}
+
+@keyframes up {
+	100% {
+		transform: translateY(-30px);
+	}
+}
